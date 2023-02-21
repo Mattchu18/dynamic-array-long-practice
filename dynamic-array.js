@@ -12,6 +12,8 @@ class DynamicArray {
   }
 
   push(val) {
+    if ( this.length === this.capacity) this.resize();
+
     this.data[this.length] = val;
     this.length++;
     return this.length
@@ -32,49 +34,51 @@ class DynamicArray {
   }
 
   shift() {
-   
-    if(this.length === 0) return undefined;
-  
+
+    if (this.length === 0) return undefined;
+
     this.length--;
     let shifted = this.data[0];
-    
-    for(let i = 0; i < this.length; i ++){
-      this.data[i] = this.data[i+1]
+
+    for (let i = 0; i < this.length; i++) {
+      this.data[i] = this.data[i + 1]
     }
     return shifted
-    
+
   }
 
   unshift(val) {
-    //return the length
-    //iterate thru this.data to shift everything to the right
-    //add val to index 0
-    //add length
-    //return length
+    if ( this.length === this.capacity) this.resize();
 
-    for(let i = this.length ; i > 0; i--){
-      this.data[i] = this.data[i-1]
+    for (let i = this.length; i > 0; i--) {
+      this.data[i] = this.data[i - 1]
     }
     this.data[0] = val;
     this.length++;
     return this.length;
-    
+
   }
 
   indexOf(val) {
-
-    // Your code here
+    for (let i = 0; i < this.length; i++) {
+      if (this.data[i] === val) return i;
+    }
+    return -1
   }
 
   resize() {
+    const arr = new Array(this.capacity *= 2);
 
-    // Your code here
+    for (let i = 0; i < this.length; i++) {
+      arr[i] = this.data[i]
+    }
+    this.data = arr
   }
 
 }
 
 
-dynamicArr = new DynamicArray(8);
+dynamicArr = new DynamicArray(4);
 console.log(dynamicArr)
 
 dynamicArr.push(1);
@@ -83,9 +87,10 @@ dynamicArr.push(3);
 
 console.log(dynamicArr)
 
-dynamicArr.pop()
+dynamicArr.resize()
 
 console.log(dynamicArr)
-
+console.log(dynamicArr.data.length)
+console.log(dynamicArr.capacity)
 
 module.exports = DynamicArray;
