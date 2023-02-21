@@ -71,7 +71,6 @@ describe('Dynamic Array', function () {
   });
 
   it('can `pop()` off the end of the array', function () {
-
     dynamicArr.push(1);
     dynamicArr.push(2);
     dynamicArr.push(3);
@@ -80,6 +79,7 @@ describe('Dynamic Array', function () {
 
     expect(dynamicArr.pop()).to.equal(3);
     expect(dynamicArr.length).to.equal(2);
+
 
     expect(dynamicArr.pop()).to.equal(2);
     expect(dynamicArr.length).to.equal(1);
